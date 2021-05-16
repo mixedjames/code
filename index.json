@@ -1,0 +1,10 @@
+[
+  {
+    "date": "16/05/2021",
+    "keywords": "C error handling",
+    "author": "James Heggie",
+    "title": "Error handling in C",
+    "description": "Thoughts on various ways of handling errors in C",
+    "file": "writing/c-error-handling/c-error-handling.html"
+  }
+]
