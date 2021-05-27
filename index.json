@@ -6,5 +6,37 @@
     "title": "Error handling in C",
     "description": "Thoughts on various ways of handling errors in C",
     "file": "writing/c-error-handling/c-error-handling.html"
+  },
+  {
+    "date": "23/05/2021",
+    "keywords": "DOS 2020 IBM PC",
+    "author": "James Heggie",
+    "title": "DOS2020: Key Components of the IBM PC",
+    "description": "What’s in an IBM PC?",
+    "file": "writing/dos2020/key-components-of-the-ibm-pc/key-components-of-the-ibm-pc.html"
+  },
+  {
+    "date": "23/05/2021",
+    "keywords": "DOS 2020",
+    "author": "James Heggie",
+    "title": "DOS2020: Global project structure",
+    "description": "What goes where?",
+    "file": "writing/dos2020/global-project-structure/global-project-structure.html"
+  },
+  {
+    "date": "27/05/2021",
+    "keywords": "DOS 2020 IBM PC",
+    "author": "James Heggie",
+    "title": "DOS2020: Useful predefined macros",
+    "description": "Macros for telling apart build environments",
+    "file": "writing/dos2020/predefined-macros/predefined-macros.html"
+  },
+  {
+    "date": "27/05/2021",
+    "keywords": "DOS 2020 IBM PC",
+    "author": "James Heggie",
+    "title": "DOS2020: Locations of DOS functions",
+    "description": "DOS functions move between headers depending on the build system",
+    "file": "writing/dos2020/dos-functions/dos-functions.html"
   }
 ]

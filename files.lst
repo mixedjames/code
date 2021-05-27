@@ -1,2 +1,6 @@
 SRC = \
-	writing/c-error-handling/c-error-handling.md
+	writing/c-error-handling/c-error-handling.md \
+	writing/dos2020/key-components-of-the-ibm-pc/key-components-of-the-ibm-pc.md \
+	writing/dos2020/global-project-structure/global-project-structure.md\
+	writing/dos2020/predefined-macros/predefined-macros.md\
+	writing/dos2020/dos-functions/dos-functions.md

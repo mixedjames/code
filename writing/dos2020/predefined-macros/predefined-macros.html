@@ -1,0 +1,199 @@
+<header class="content-header">
+<h1 class="title">DOS2020: Useful predefined macros</h1>
+<p class="author">James Heggie</p>
+<p class="date">27/05/2021</p>
+</header>
+
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
+<section id="identifying-the-compiler" class="level2">
+<h2>Identifying the compiler</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 18%" />
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Macro</th>
+<th style="text-align: left;">DJGPP</th>
+<th style="text-align: left;">Borland C</th>
+<th style="text-align: left;">Watcom C</th>
+<th style="text-align: left;">Microsoft C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">__DJGPP__</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">__BORLANDC__</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">__WATCOMC__</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_MSC_VER</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="identifying-the-bitness-and-memory-model" class="level2">
+<h2>Identifying the bitness and memory model</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 18%" />
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Macro</th>
+<th style="text-align: left;">DJGPP</th>
+<th style="text-align: left;">Borland C</th>
+<th style="text-align: left;">Watcom C</th>
+<th style="text-align: left;">Microsoft C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">M_I86</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes (real mode)</td>
+<td style="text-align: left;">Yes (real mode)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M_I86SM, M_I86MM, M_I86CM, M_I86LM, M_I86HM</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes (real mode)</td>
+<td style="text-align: left;">Yes (real mode)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">__TINY__ etc.</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes (real mode)</td>
+<td style="text-align: left;">Yes (real mode)</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">__i386__</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="identifying-the-target-environment" class="level2">
+<h2>Identifying the target environment</h2>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 18%" />
+<col style="width: 19%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Macro</th>
+<th style="text-align: left;">DJGPP</th>
+<th style="text-align: left;">Borland C</th>
+<th style="text-align: left;">Watcom C</th>
+<th style="text-align: left;">Microsoft C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">__MSDOS__</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_MSDOS</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="how-to-get-a-list-of-predefined-macros-for-each-system" class="level1">
+<h1>How to get a list of predefined macros for each system</h1>
+<section id="djgpp" class="level2">
+<h2>DJGPP</h2>
+<p>I can’t find a DJGPP-specific list of predefined macros and what they do but I can generate a list of macros…</p>
+<p>Open an DJGPP command prompt:</p>
+<pre><code>GCC -E -x c -dM BLANK.C &gt; MACROS.TXT</code></pre>
+<p>(Note: you need to be in the same directory as BLANK.C - actually it doesn’t matter what source file you use, but a blank one wont be contaminated by and macros introduced by the file itself)</p>
+<p>This will create the file <code>MACROS.TXT</code>.</p>
+<p>For reference, the flags used are as follows…</p>
+<ul>
+<li><code>-E</code> - Stop compilation after preprocessing</li>
+<li><code>-x c</code> - Set the language to C irrespective of file extension etc.</li>
+<li><code>-dM</code> - Generate a list of <code>#define</code> directives for all macros defined during compilation.</li>
+</ul>
+</section>
+<section id="watcom" class="level2">
+<h2>Watcom</h2>
+<p>Defined in the <em>Open Watcom C/C++ User’s Guide</em>: <code>C:\WATCOM\MANUALS/CGUIDE.PDF</code> page 75 (their numbering) or page 87 (actual PDF page)</p>
+</section>
+<section id="borland-c-5" class="level2">
+<h2>Borland C 5</h2>
+<p>Defining in the <em>Borland C++ Programmer’s Guide and Library Reference</em>: <code>C:\BC5\HELP\BCPP.HLP</code>, search for “Predefined Macros” in the index.</p>
+</section>
+<section id="microsoft-visual-c-1.5" class="level2">
+<h2>Microsoft Visual C 1.5</h2>
+<p>As always, MSVC turns out to be a pain in the ass. I have yet to find a single list so here’s the trail I’ve followed so far…</p>
+<section id="the-included-unhelp-files" class="level3">
+<h3>The included (un)help files</h3>
+<p>I can’t figure out how to open the MSVC help system as one unified system which I think is at the heart of the problem. However, I did manage to find this:</p>
+<p><code>C:\MSVC\HELP\MSCOPTS.HLP</code>, search for “predefined symbols, undefining”</p>
+<p>This states that a list of ANSI and Microsoft-specific predefined macros can be found in the “C Language Reference and the C++ Language Reference”. Perhaps unsurprisingly I can’t find this.</p>
+</section>
+<section id="re-purposing-borlands-standard-library" class="level3">
+<h3>Re-purposing Borland’s standard library</h3>
+<p>BC5’s standard library seems to be one they licensed from <em>Rogue Wave Software</em> and it seems to be designed to work on a massive variety of variously capable systems.</p>
+<p><code>STDCOMP.H</code> is a veritable treasure trove of macro-based configuration possibilities. Unfortunately this only lead to the discovery of <code>_MSC_VER</code></p>
+</section>
+<section id="what-about-watcom" class="level3">
+<h3>What about Watcom?</h3>
+<p>Whilst investigating the Watcom compiler I found the <code>M_I86</code> macro. The Watcom manual states that this is defined when compiling a 16-bit 80-86 compatible environment. This then lead to the discovery of the other model-specific macros which MS seems to share with Watcom…</p>
+<ul>
+<li><code>M_I86SM</code> - Small model</li>
+<li><code>M_I86MM</code> - Medium model</li>
+<li><code>M_I86LM</code> - Large model</li>
+<li><code>M_I86CM</code> - Compact model</li>
+<li><code>M_I86HM</code> - Huge model</li>
+</ul>
+</section>
+</section>
+</section>

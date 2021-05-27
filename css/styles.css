@@ -1,0 +1,13 @@
+.technical-notes {
+  border: solid rgb(47, 84, 150) 1px;
+  background: rgb(180, 198, 231);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.info-box {
+  border: solid rgb(83, 129, 53) 1px;
+  background: rgb(197, 224, 179);
+  padding-left: 20px;
+  padding-right: 20px;
+}

@@ -1,0 +1,8 @@
+{
+  "date": "27/05/2021",
+  "keywords": "DOS 2020 IBM PC",
+  "author": "James Heggie",
+  "title": "DOS2020: Locations of DOS functions",
+  "description": "DOS functions move between headers depending on the build system",
+  "file": "writing/dos2020/dos-functions/dos-functions.html"
+}

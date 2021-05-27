@@ -1,0 +1,179 @@
+<header class="content-header">
+<h1 class="title">DOS2020: Locations of DOS functions</h1>
+<p class="author">James Heggie</p>
+<p class="date">27/05/2021</p>
+</header>
+
+<section id="tldr" class="level1">
+<h1>TL;DR</h1>
+<pre><code>(1) Headers...
+#include &lt;dos.h&gt;
+#include &lt;conio.h&gt;
+
+(2) Interrupt control
+_enable();
+_disable();
+
+(3) Calling interrupts
+int86(...); &amp; family are all portable
+
+(4) Port I/O
+/* Stick to 8 or 16 bit accesses */
+outp();
+inp();</code></pre>
+</section>
+<section id="what-functions-live-where" class="level1">
+<h1>What functions live where?</h1>
+<p>There’s actually far more portability here than I thought.</p>
+<section id="controlling-interrupts" class="level2">
+<h2>Controlling interrupts</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function/ structure</th>
+<th style="text-align: left;">DJGPP</th>
+<th style="text-align: left;">Borland</th>
+<th style="text-align: left;">Watcom</th>
+<th style="text-align: left;">Microsoft</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">enable()/ disable()</td>
+<td style="text-align: left;">dos.h (but bios.h includes this)</td>
+<td style="text-align: left;">dos.h (bios.h does not include this!)</td>
+<td style="text-align: left;">Not present</td>
+<td style="text-align: left;">Not present</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_enable()/ _disable()</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">i86.h (but dos.h includes this)</td>
+<td style="text-align: left;">dos.h</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="calling-interrupts" class="level2">
+<h2>Calling interrupts</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function/ structure</th>
+<th style="text-align: left;">DJGPP</th>
+<th style="text-align: left;">Borland</th>
+<th style="text-align: left;">Watcom</th>
+<th style="text-align: left;">Microsoft</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">int86/ int86x</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">i86.h (included via dos.h)</td>
+<td style="text-align: left;">dos.h</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">intdos/ intdosx</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">dos.h</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">int386/ int386x</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">dos.h</td>
+<td style="text-align: left;">i86.h (included via dos.h)</td>
+<td style="text-align: left;">Not present</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ports" class="level2">
+<h2>Ports</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Function/ structure</th>
+<th style="text-align: left;">DJGPP</th>
+<th style="text-align: left;">Borland</th>
+<th style="text-align: left;">Watcom</th>
+<th style="text-align: left;">Microsoft</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">inportb()/ outportb()</td>
+<td style="text-align: left;">pc.h (but dos.h includes this &amp; thus as does bios.h)</td>
+<td style="text-align: left;">dos.h + conio.h</td>
+<td style="text-align: left;">Not present</td>
+<td style="text-align: left;">Not present</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">inp()/ outp()</td>
+<td style="text-align: left;">As above.</td>
+<td style="text-align: left;">As above.</td>
+<td style="text-align: left;">conio.h</td>
+<td style="text-align: left;">conio.h</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">inpd()/ outpd()</td>
+<td style="text-align: left;">Not present</td>
+<td style="text-align: left;">Not present</td>
+<td style="text-align: left;">conio.h (if __386__ defined)</td>
+<td style="text-align: left;">Not present</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">inportl()/ outportl()</td>
+<td style="text-align: left;">pc.h (as above)</td>
+<td style="text-align: left;">Not present</td>
+<td style="text-align: left;">Not present</td>
+<td style="text-align: left;">Not present</td>
+</tr>
+</tbody>
+</table>
+<p>Note: 32-bit port access has no common set of functions. Hopefully this isn’t an issue as DOS-era hardward requiring this is fairly rare I think. Trivial to implement in NASM if required but not sure is possible to replicate inline behaviour seen in DJGPP and Watcom.</p>
+</section>
+</section>
+<section id="some-notes" class="level1">
+<h1>Some notes</h1>
+<section id="header-files" class="level2">
+<h2>Header files</h2>
+<p>These functions usually live in one of a few headers so there is some degree of pseudo-standardization…</p>
+<ul>
+<li><code>dos.h</code> - Mappings of int 21h functions</li>
+<li><code>bios.h</code> - Mappings of BIOS functions - e.g. int 13h</li>
+<li><code>io.h</code> - Odd selection of other I/O functions</li>
+<li><code>conio.h</code> - Odd selection of other I/O functions</li>
+</ul>
+<p>Some other headers seem to be environment specific…</p>
+<ul>
+<li><code>pc.h</code> (DJGPP) - Although this is included by <code>dos.h</code> so probably doesn’t matter that it’s independent.</li>
+<li><code>i86.h</code> (Watcom) - Although included by <code>dos.h</code> so, as above, can probably be ignored.</li>
+</ul>
+</section>
+</section>
